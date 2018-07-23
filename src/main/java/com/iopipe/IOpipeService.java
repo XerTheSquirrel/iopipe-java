@@ -27,8 +27,6 @@ import java.util.Objects;
 import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 import java.util.Set;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 /**
  * This class provides a single connection to the IOpipe service which may then
@@ -45,10 +43,6 @@ import org.apache.logging.log4j.LogManager;
  */
 public final class IOpipeService
 {
-	/** Logging. */
-	private static final Logger _LOGGER =
-		LogManager.getLogger(IOpipeService.class);
-	
 	/** This is used to detect cold starts. */
 	static final AtomicBoolean _THAWED =
 		new AtomicBoolean();
@@ -120,7 +114,6 @@ public final class IOpipeService
 			// Cannot report error to IOpipe so print to the console
 			catch (RemoteException e)
 			{
-				_LOGGER.error("Could not connect to the remote server.", e);
 			}
 		
 		// If the connection failed, use one which does nothing
@@ -253,8 +246,6 @@ public final class IOpipeService
 			return __func.apply(exec);
 		}
 		
-		_LOGGER.debug(() -> String.format("Invoking context %08x",
-			System.identityHashCode(__context)));
 		
 		// Is this coldstarted?
 		boolean coldstarted = !this._coldstartflag.getAndSet(true);
@@ -276,7 +267,6 @@ public final class IOpipeService
 				}
 				catch (RuntimeException e)
 				{
-					_LOGGER.error("Could not run pre-executable plugin.", e);
 				}
 		}
 		
@@ -324,7 +314,6 @@ public final class IOpipeService
 				}
 				catch (RuntimeException e)
 				{
-					_LOGGER.error("Could not run post-executable plugin.", e);
 				}
 		}
 		
@@ -370,8 +359,6 @@ public final class IOpipeService
 		IOpipeService rv = _INSTANCE;
 		if (rv == null)
 		{
-			_LOGGER.debug("Initializing new service instance.");
-			
 			_INSTANCE = (rv = new IOpipeService());
 		}
 		return rv;

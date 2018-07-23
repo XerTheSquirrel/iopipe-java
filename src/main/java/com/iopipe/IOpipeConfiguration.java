@@ -12,9 +12,6 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.TreeMap;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 /**
  * This class contains the configuration for IOpipe and specifies the settings
@@ -26,10 +23,6 @@ import org.apache.logging.log4j.LogManager;
  */
 public final class IOpipeConfiguration
 {
-	/** Used for logging. */
-	private static final Logger _LOGGER =
-		LogManager.getLogger(IOpipeConfiguration.class);
-	
 	/** Used to compare plugin names. */
 	private static final Comparator<String> _PLUGIN_COMPARATOR =
 		new Comparator<String>()
@@ -156,19 +149,13 @@ public final class IOpipeConfiguration
 		IOpipeConfiguration use = DISABLED_CONFIG;
 		try
 		{
-			_LOGGER.debug("Initializing default configuration.");
 			use = IOpipeConfiguration.byDefault();
 		}
 		catch (IllegalArgumentException|SecurityException e)
 		{
-			_LOGGER.error("Failed to initialize default configuration, " +
-				"your method will still run however it will not report " +
-				"anything to IOpipe.", e);
 		}
 		DEFAULT_CONFIG = use;
 		
-		// Debug the default config
-		_LOGGER.debug("Default config: {}", use);
 	}
 	
 	/**
@@ -518,7 +505,6 @@ public final class IOpipeConfiguration
 			// Setup service URL
 			String surl;
 			rv.setServiceUrl((surl = IOpipeConstants.DEFAULT_SERVICE_URL));
-			_LOGGER.debug(() -> "Remote URL: " + surl);
 			
 			// And the profiler URL
 			rv.setProfilerUrl(IOpipeConstants.DEFAULT_PROFILER_URL);

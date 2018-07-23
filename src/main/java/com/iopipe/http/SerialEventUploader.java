@@ -3,8 +3,6 @@ package com.iopipe.http;
 import com.iopipe.http.RemoteRequest;
 import com.iopipe.IOpipeEventUploader;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 /**
  * This is an uploader which is completely serial based and it will only
@@ -16,10 +14,6 @@ import org.apache.logging.log4j.LogManager;
 public final class SerialEventUploader
 	implements IOpipeEventUploader
 {
-	/** Logging. */
-	private static final Logger _LOGGER =
-		LogManager.getLogger(SerialEventUploader.class);
-	
 	/** The connection to the remote service to use. */
 	protected final RemoteConnection connection;
 	
@@ -66,9 +60,6 @@ public final class SerialEventUploader
 		// Generate report
 		try
 		{
-			// Report what is to be sent
-			_LOGGER.debug(() -> "Send: " + __r + " " + __debugBody(__r));
-			
 			RemoteResult result = this.connection.send(RequestType.POST, __r);
 			
 			// Only the 200 range is valid for okay responses
@@ -77,22 +68,13 @@ public final class SerialEventUploader
 			{
 				this._badresultcount.getAndIncrement();
 				
-				// Emit errors for failed requests
-				_LOGGER.error(() -> "Recv: " + result + " " +
-					__debugBody(result));
 			}
 			
-			// Debug log successful requests
-			else
-				_LOGGER.debug(() -> "Recv: " + result + " " +
-					__debugBody(result));
 		}
 		
 		// Failed to write to the server
 		catch (RemoteException e)
 		{
-			_LOGGER.error("Could not sent request to server.", e);
-			
 			this._badresultcount.getAndIncrement();
 		}
 	}

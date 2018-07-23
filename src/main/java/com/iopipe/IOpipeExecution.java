@@ -24,8 +24,6 @@ import javax.json.JsonException;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 import javax.json.stream.JsonGenerator;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 /**
  * This class provides access to information and functionality which is
@@ -41,10 +39,6 @@ import org.apache.logging.log4j.LogManager;
  */
 public final class IOpipeExecution
 {
-	/** Logging. */
-	private static final Logger _LOGGER =
-		LogManager.getLogger(IOpipeExecution.class);
-	
 	/** Is this a Linux system? */
 	private static final boolean _IS_LINUX =
 		"linux".compareToIgnoreCase(
@@ -678,9 +672,6 @@ public final class IOpipeExecution
 				String xname = metric.name();
 				if (!IOpipeExecution.__isNameInLimit(xname))
 				{
-					_LOGGER.warn("Metric name exceeds the {} codepoint " +
-						"length limit and will not be reported: {}",
-						IOpipeConstants.NAME_CODEPOINT_LIMIT, xname);
 					continue;
 				}
 				
@@ -692,9 +683,6 @@ public final class IOpipeExecution
 					
 					if (!IOpipeExecution.__isValueInLimit(svalue))
 					{
-						_LOGGER.warn("Metric value exceeds the {} codepoint " +
-							"length limit and will not be reported: {}",
-							IOpipeConstants.VALUE_CODEPOINT_LIMIT, xname);
 						continue;
 					}	
 				}
@@ -751,11 +739,6 @@ public final class IOpipeExecution
 				if (IOpipeExecution.__isNameInLimit(label))
 					gen.write(label);
 				
-				// Emit warning
-				else
-					_LOGGER.warn("Label exceeds the {} codepoint limit and " +
-						"will not be reported: {}",
-						IOpipeConstants.NAME_CODEPOINT_LIMIT, label);
 			}
 			
 			// End of labels
