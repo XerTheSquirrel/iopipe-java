@@ -24,6 +24,7 @@ It is licensed under the Apache 2.0.
    * [Profiling](#profiling)
    * [Tracing](#tracing)
  * [Resources](#resources)
+   * [Overhead](#overhead)
 
 # Building With IOpipe
 
@@ -313,4 +314,16 @@ In general:
 
  * [Java Programming Model on AWS](https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model.html)
  * [Logging on AWS](https://docs.aws.amazon.com/lambda/latest/dg/java-logging.html)
+
+## Overhead
+
+Overhead of IOpipe at various memory levels with profiling disabled, note that
+execution times may vary due to JIT compilation, garbage collection, and
+network latency. Times were measured using CloudWatch running an empty lambda
+wrapped with IOpipe.
+
+ * 512MB
+   * Minimum:   6ms
+   * Average:  20ms
+   * Maximum:  80ms
 
