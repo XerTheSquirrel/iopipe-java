@@ -209,13 +209,14 @@
       <version>1.11.22</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- Runtime -->
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.json</artifactId>
       <version>1.1.2</version>
+      <scope>test</scope>
     </dependency>
+
+    <!-- Runtime -->
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-lambda-java-core</artifactId>
