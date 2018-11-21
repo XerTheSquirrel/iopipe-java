@@ -499,7 +499,7 @@ public final class IOpipeConfiguration
 			}
 			
 			// Just use the standard service connction
-			rv.setRemoteConnectionFactory(new ServiceConnectionFactory());
+			rv.setRemoteConnectionFactory(new NullConnectionFactory()/*new ServiceConnectionFactory()*/);
 			
 			// Setup service URL
 			String surl = IOpipeConfiguration.getVariable("com.iopipe.collectorurl",
