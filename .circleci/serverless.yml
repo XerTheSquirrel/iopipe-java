@@ -1,0 +1,13 @@
+service: measurefunc
+
+provider:
+  name: aws
+  runtime: java8
+
+package:
+  artifact: measurefunc.jar
+
+functions:
+  measurefunc:
+    handler: test.MeasureFunc
+
