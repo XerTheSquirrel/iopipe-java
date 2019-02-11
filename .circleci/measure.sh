@@ -37,7 +37,7 @@ then
 fi
 
 # Go back to the CircleCI directory
-cd .circlci
+cd .circleci
 
 # Merge JARs into single JAR
 rm -vf measurefunc.jar
