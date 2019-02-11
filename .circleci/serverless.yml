@@ -3,11 +3,14 @@ service: measurefunc
 provider:
   name: aws
   runtime: java8
+  environment:
+    IOPIPE_TOKEN: MeasureTestInvalidToken
+    IOPIPE_HANDLER: MeasureFunc
 
 package:
   artifact: measurefunc.jar
 
 functions:
   measurefunc:
-    handler: MeasureFunc
+    handler: com.iopipe.generic.GenericAWSRequestHandler
 
