@@ -64,4 +64,7 @@ then
 	exit 1
 fi
 
+# Invoke it
+sls invoke -l -f measurefunc
+
 exit 2

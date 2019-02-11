@@ -9,5 +9,5 @@ package:
 
 functions:
   measurefunc:
-    handler: test.MeasureFunc
+    handler: MeasureFunc
 
