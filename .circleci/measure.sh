@@ -39,6 +39,13 @@ fi
 # Go back to the CircleCI directory
 cd .circleci
 
+# Compile measure function
+if ! javac -cp measurefunc.jar -source 1.8 -target 1.8 MeasureFunc.java
+then
+	echo "Failed to compile measure function."
+	exit 1
+fi
+
 # Merge JARs into single JAR
 rm -vf measurefunc.jar
 if ! zipmerge measurefunc.jar target/*.jar
@@ -47,7 +54,8 @@ then
 	exit 1
 fi
 
-exit 2
+# Add measurefunction to the JAR
+zip measurefunc.jar MeasureFunc.class
 
 # Deploy the function
 if ! sls deploy
@@ -56,3 +64,4 @@ then
 	exit 1
 fi
 
+exit 2
