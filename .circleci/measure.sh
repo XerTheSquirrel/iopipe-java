@@ -20,10 +20,10 @@ fi
 
 # Go to source directory and try to build the measuring JAR
 cd ..
-mvn clean -DoutputDirectory=.circleci/target
+mvn clean
 
 # Build package
-if ! mvn package -Dmaven.test.skip=true -DoutputDirectory=.circleci/target
+if ! mvn package -Dmaven.test.skip=true
 then
 	echo "Failed to package."
 	exit 1
@@ -48,7 +48,7 @@ fi
 
 # Merge JARs into single JAR
 rm -vf measurefunc.jar
-if ! zipmerge measurefunc.jar target/*.jar
+if ! zipmerge measurefunc.jar ../target/iopipe-*.jar target/*.jar
 then
 	echo "Failed to merge ZIP."
 	exit 1
