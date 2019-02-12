@@ -9,8 +9,14 @@ then
 fi
 
 # Use these secret keys for measuring
-export AWS_ACCESS_KEY_ID="$MEASURE_AWS_ACCESS_KEY_ID"
-export AWS_SECRET_ACCESS_KEY="$MEASURE_AWS_SECRET_ACCESS_KEY"
+if [ ! -z "$MEASURE_AWS_ACCESS_KEY_ID" ]
+then
+	export AWS_ACCESS_KEY_ID="$MEASURE_AWS_ACCESS_KEY_ID"
+fi
+if [ ! -z "$MEASURE_AWS_SECRET_ACCESS_KEY" ]
+then
+	export AWS_SECRET_ACCESS_KEY="$MEASURE_AWS_SECRET_ACCESS_KEY"
+fi
 
 # Go to the CircleCI directory and do stuff there
 if [ ! -f config.yml ]
