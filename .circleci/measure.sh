@@ -39,18 +39,18 @@ fi
 # Go back to the CircleCI directory
 cd .circleci
 
-# Compile measure function
-if ! javac -cp measurefunc.jar -source 1.8 -target 1.8 MeasureFunc.java
-then
-	echo "Failed to compile measure function."
-	exit 1
-fi
-
 # Merge JARs into single JAR
 rm -vf measurefunc.jar
 if ! zipmerge measurefunc.jar ../target/iopipe-*.jar target/*.jar
 then
 	echo "Failed to merge ZIP."
+	exit 1
+fi
+
+# Compile measure function
+if ! javac -cp measurefunc.jar -source 1.8 -target 1.8 MeasureFunc.java
+then
+	echo "Failed to compile measure function."
 	exit 1
 fi
 
