@@ -63,8 +63,11 @@ fi
 # Add measurefunction to the JAR
 zip measurefunc.jar MeasureFunc.class
 
+# Undeploy
+sls remove
+
 # Deploy the function
-if ! sls deploy -f measurefunc
+if ! sls deploy
 then
 	echo "Could not deploy function"
 	exit 1

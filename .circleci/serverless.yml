@@ -6,11 +6,12 @@ provider:
   environment:
     IOPIPE_TOKEN: MeasureTestInvalidToken
     IOPIPE_HANDLER: MeasureFunc
+    JAVA_TOOL_OPTIONS: -verbose:class
 
 package:
   artifact: measurefunc.jar
 
 functions:
   measurefunc:
-    handler: com.iopipe.generic.GenericAWSRequestHandler
+    handler: MeasureFunc::handleRequest
 

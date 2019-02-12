@@ -2,6 +2,8 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.iopipe.IOpipeExecution;
+import com.iopipe.SimpleRequestHandlerWrapper;
 
 /**
  * Basic measure function.
@@ -9,16 +11,16 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
  * @since 2019/02/11
  */
 public class MeasureFunc
-	implements RequestHandler<Object, Object>
+	extends SimpleRequestHandlerWrapper<Object, Object>
 {
 	/**
 	 * {@inheritDoc}
 	 * @since 2019/02/11
 	 */
 	@Override
-	public Object handleRequest(Object __val, Context __context)
+	public Object wrappedHandleRequest(IOpipeExecution __exec, Object __v)
 	{
 		System.out.println("Executed baseline measure method.");
-		return __val;
+		return __v;
 	}
 }
