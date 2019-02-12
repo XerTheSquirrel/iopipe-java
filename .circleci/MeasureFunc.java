@@ -18,6 +18,7 @@ public class MeasureFunc
 	@Override
 	public Object handleRequest(Object __val, Context __context)
 	{
+		System.out.println("Executed baseline measure method.");
 		return __val;
 	}
 }
